@@ -1,5 +1,5 @@
 //jshint esversion:6
-
+const posts=[]
 const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
@@ -16,7 +16,9 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
 app.get("/",(req,res)=>{
-  res.render("home.ejs",{ homeStartingContent});
+  res.render("home.ejs",{ homeStartingContent:homeStartingContent,
+  posts:posts
+  });
 })
 app.get("/about",(req,res)=>{
   res.render("about.ejs",{ aboutContent});
@@ -29,8 +31,14 @@ app.get("/compose",(req,res)=>{
 })
 
 app.post("/compose",(req,res)=>{
-  const result = req.body;
-  console.log(result);
+  const result ={
+    post:req.body.compose,
+    body:req.body.postBody
+  };
+  posts.push(result)
+  res.redirect("/");
+
+
 })
 
 app.listen(3000, function() {
