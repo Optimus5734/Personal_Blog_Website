@@ -18,6 +18,12 @@ app.use(express.static("public"));
 app.get("/",(req,res)=>{
   res.render("home.ejs",{ homeStartingContent});
 })
+app.get("/about",(req,res)=>{
+  res.render("about.ejs",{ aboutContent});
+})
+app.get("/contact",(req,res)=>{
+  res.render("contact.ejs",{ contactContent});
+})
 
 
 
